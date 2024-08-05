@@ -13,6 +13,7 @@ lan_ip_address="192.168.88.202"
 #
 ttyd_auto_login="/bin/login -f root"
 shell="bash"
+DISTRIB_DESCRIPTION="ImmortalWrt v$(TZ=UTC-8 date "+%Y.%m.%d")"
 
 # log potential errors
 exec >/tmp/setup.log 2>&1
@@ -53,11 +54,16 @@ fi
 
 # Configure ttyd
 if [[ -n "$ttyd_auto_login" ]]; then
-sed -i 's|/bin/login|'"$ttyd_auto_login"'|g' /etc/config/ttyd
+  sed -i 's|/bin/login|'"$ttyd_auto_login"'|g' /etc/config/ttyd
 fi
 
 if [[ -n "$shell" ]]; then
-sed -i 's/ash/'"$shell"'/g' /etc/passwd
+  sed -i 's/ash/'"$shell"'/g' /etc/passwd
+fi
+
+if [[ -n "$DISTRIB_DESCRIPTION" ]]; then
+  sed -i '/^DISTRIB_DESCRIPTION/d' /etc/openwrt_release
+  echo 'DISTRIB_DESCRIPTION="$DISTRIB_DESCRIPTION"' >> /etc/openwrt_release
 fi
 
 # 关闭DHCP
