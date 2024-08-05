@@ -63,7 +63,7 @@ fi
 
 if [[ -n "$DISTRIB_DESCRIPTION" ]]; then
   sed -i '/^DISTRIB_DESCRIPTION/d' /etc/openwrt_release
-  echo 'DISTRIB_DESCRIPTION="$DISTRIB_DESCRIPTION"' >> /etc/openwrt_release
+  echo 'DISTRIB_DESCRIPTION=$DISTRIB_DESCRIPTION' >> /etc/openwrt_release
 fi
 
 # 关闭DHCP
