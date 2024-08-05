@@ -27,11 +27,11 @@ fi
 
 # Configure ttyd
 if [[ -n "$ttyd_auto_login" ]]; then
-  sed -i "s|/bin/login|$ttyd_auto_login|g" etc/config/ttyd
+  sed -i 's|/bin/login|"$ttyd_auto_login"|g' etc/config/ttyd
 fi
 
 if [[ -n "$shell" ]]; then
-  sed -i "s/ash/$shell/g" /etc/passwd
+  sed -i 's/ash/"$shell"/g' /etc/passwd
 fi
  
 # Configure LAN
