@@ -24,6 +24,15 @@ uci commit dhcp
 if [[ -n "$root_password" ]]; then
   (echo "$root_password"; sleep 1; echo "$root_password") | passwd > /dev/null
 fi
+
+# Configure ttyd
+if [[ -n "$ttyd_auto_login" ]]; then
+  sed -i "s|/bin/login|$ttyd_auto_login|g" etc/config/ttyd
+fi
+
+if [[ -n "$shell" ]]; then
+  sed -i "s/ash/$shell/g" /etc/passwd
+fi
  
 # Configure LAN
 # More options: https://openwrt.org/docs/guide-user/base-system/basic-networking
@@ -55,12 +64,4 @@ if [[ -n "$pppoe_username" && -n "$pppoe_password" ]]; then
   uci commit network
 fi
 
-# Configure ttyd
-if [[ -n "$ttyd_auto_login" ]]; then
-  sed -i "s|/bin/login|$ttyd_auto_login|g" etc/config/ttyd
-fi
-if [[ -n "$shell" ]]; then
-  sed -i "s/ash/$shell/g" /etc/passwd
-fi
- 
 echo "All done!"
