@@ -10,28 +10,12 @@ lan_ip_address="192.168.88.202"
 # pppoe_username="123"
 # pppoe_password="456"
 # wan_device="eth0"
-#
-# ttyd_auto_login="/bin/login -f root"
-# shell="bash"
  
 # log potential errors
 exec >/tmp/setup.log 2>&1
 
-# 关闭DHCP
-uci set dhcp.lan.ignore='1'
-uci commit dhcp
-
 if [[ -n "$root_password" ]]; then
   (echo "$root_password"; sleep 1; echo "$root_password") | passwd > /dev/null
-fi
-
-# Configure ttyd
-if [[ -n "$ttyd_auto_login" ]]; then
-  sed -i 's|/bin/login|"$ttyd_auto_login"|g' etc/config/ttyd
-fi
-
-if [[ -n "$shell" ]]; then
-  sed -i 's/ash/"$shell"/g' /etc/passwd
 fi
  
 # Configure LAN
@@ -64,4 +48,10 @@ if [[ -n "$pppoe_username" && -n "$pppoe_password" ]]; then
   uci commit network
 fi
 
+# 关闭DHCP
+uci set dhcp.lan.ignore='1'
+uci commit dhcp
+sed -i 's|/bin/login|/bin/login -f root|g' /etc/config/ttyd
+sed -i 's/ash/bash/' /etc/passwd
+ 
 echo "All done!"
