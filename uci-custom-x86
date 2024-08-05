@@ -51,7 +51,9 @@ fi
 # 关闭DHCP
 uci set dhcp.lan.ignore='1'
 uci commit dhcp
-sed -i 's|/bin/login|/bin/login -f root|g' /etc/config/ttyd
-sed -i 's/ash/bash/' /etc/passwd
+ttyd_login="/bin/login -f root"
+sed -i 's|/bin/login|'"$ttyd_login"'|g' /etc/config/ttyd
+shell="bash"
+sed -i 's/ash/'"$shell"'/g' /etc/passwd
  
 echo "All done!"
