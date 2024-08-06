@@ -61,11 +61,6 @@ if [[ -n "$shell" ]]; then
   sed -i 's/ash/'"$shell"'/g' /etc/passwd
 fi
 
-if [[ -n "$DISTRIB_DESCRIPTION" ]]; then
-  sed -i '/^DISTRIB_DESCRIPTION/d' /etc/openwrt_release
-  echo 'DISTRIB_DESCRIPTION=$DISTRIB_DESCRIPTION' >> /etc/openwrt_release
-fi
-
 # 关闭DHCP
 uci set dhcp.lan.ignore='1'
 uci commit dhcp
