@@ -53,7 +53,8 @@ fi
 
 # Configure ttyd
 if [[ -n "$ttyd_auto_login" ]]; then
-  sed -i 's|/bin/login|'"$ttyd_auto_login"'|g' /etc/config/ttyd
+  uci set ttyd.@ttyd[0].command="$ttyd_auto_login"
+  uci commit ttyd
 fi
 
 if [[ -n "$shell" ]]; then
