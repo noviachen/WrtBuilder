@@ -57,7 +57,7 @@ if [[ -n "$ttyd_auto_login" ]]; then
 fi
 
 if [[ -n "$shell" ]]; then
-  sed -i 's/ash/'"$shell"'/g' /etc/passwd
+  sed -i 's|/bin/ash|'"$shell"'|g' /etc/passwd
 fi
 
 echo "All done!"
