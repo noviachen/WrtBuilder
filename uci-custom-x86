@@ -53,7 +53,7 @@ fi
 
 # Configure ttyd
 if [[ -n "$ttyd_auto_login" ]]; then
-  uci set ttyd.@ttyd[0].command="$ttyd_login"
+  uci set ttyd.@ttyd[0].command="$ttyd_auto_login"
   uci commit ttyd
 fi
 
