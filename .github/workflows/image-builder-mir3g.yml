@@ -9,7 +9,7 @@ env:
   UCI_CUSTOM_FILE: uci-custom-mir3g
   PACKAGES_LIST_FILE: packages.list-mir3g
   PACKAGES_FOLDER: packages-mir3g
-  DOWNLOAD_URL: https://downloads.immortalwrt.org/releases/23.05.3/targets/ramips/mt7621/immortalwrt-imagebuilder-23.05.3-ramips-mt7621.Linux-x86_64.tar.xz
+  DOWNLOAD_URL: https://downloads.immortalwrt.org/releases/23.05.4/targets/ramips/mt7621/immortalwrt-imagebuilder-23.05.4-ramips-mt7621.Linux-x86_64.tar.xz
   TZ: Asia/Shanghai
 
 jobs:
